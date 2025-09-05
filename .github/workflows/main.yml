@@ -18,12 +18,14 @@ jobs:
 
             - name: Run tests
               run: mvn test
-            
-            - name: SonarQube Cloud
+
+            - name: SonarCloud Scan
               uses: SonarSource/sonarcloud-github-action@v3
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
               with:
                   args: >
                       -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
                       -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
                       -Dsonar.host.url=https://sonarcloud.io
-                      -Dsonar.login=${{ secrets.SONAR_CLOUD_KEY }}
+                      -Dsonar.login=${{ secrets.SONAR_TOKEN }}
